@@ -1,12 +1,13 @@
 # backup_build.sh
 # creator: Mike O'Shea 
-# Updated: 05/05/2021 
+# Updated: 06/05/2021 
 # Creates zip file backups of the key folders and config files
 # specified in the last column of the zip commands.
 # It records when it runs if the defined log file.
-# It is run when the tmuxinator webdev project starts,
-# but doesn't run when you disconnect and reconnect to the 
-# session. So it should be run regularly manually!
+# It is run when you detach from the tmuxinator webdev session,
+# so will backup changes made during that session.
+# It should be run regularly manually, depending on the changes
+# you have made or are about to make?
 
 # GNU General Public License, version 3
 
