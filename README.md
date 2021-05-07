@@ -1,4 +1,4 @@
-# Project Scripts 
+# Media Server Scripts 
 A collection of scripts that I use within the Music/Media Server.
 The scripts are in sub-folder categories:
 -backup 
