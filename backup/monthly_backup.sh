@@ -1,6 +1,6 @@
 # monthly_backup.sh
 # creator: Mike O'Shea 
-# Updated: 05/05/2021 
+# Updated: 07/05/2021 
 # Creates a singe zip file backup of the key folders 
 # and config files specified in the last column 
 # of the zip commands.
@@ -13,7 +13,7 @@
 
 #!/bin/bash 
 
-now=$(date +%Y-%m-%d,%H%M)
+now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
 name="$fnow-media_server.zip"
 log='/get_iplayer/lists/script_log.csv'
