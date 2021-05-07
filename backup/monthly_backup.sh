@@ -30,6 +30,7 @@ zip -r -Z bzip2 /storage/$name 	/home/mike/.vimrc
 zip -r -Z bzip2 /storage/$name 	/home/mike/.gitconfig
 zip -r -Z bzip2 /storage/$name 	/home/mike/.bashrc
 zip -r -Z bzip2 /storage/$name	/home/mike/.tmux.conf
+zip -r -Z bzip2 /storage/$name  /etc/nginx/nginx.conf
 zip -r -Z bzip2 /storage/$name	/home/mike/.config/transmission-daemon/settings.json
 
 rsync -a -r $name  $target

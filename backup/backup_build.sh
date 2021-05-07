@@ -28,6 +28,7 @@ zip -r -Z bzip2 /storage/$fnow-config.zip       /home/mike/.vimrc
 zip -r -Z bzip2 /storage/$fnow-config.zip       /home/mike/.gitconfig
 zip -r -Z bzip2 /storage/$fnow-config.zip       /home/mike/.bashrc
 zip -r -Z bzip2 /storage/$fnow-config.zip       /home/mike/.tmux.conf
+zip -r -Z bzip2 /storage/$fnow-config.zip	/etc/nginx/nginx.conf
 zip -r -Z bzip2 /storage/$fnow-config.zip 	/home/mike/.config/transmission-daemon/settings.json
 
 echo "$now,backup_build.sh,Various,/storage/" >> $log
