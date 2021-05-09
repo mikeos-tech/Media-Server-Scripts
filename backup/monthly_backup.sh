@@ -1,6 +1,6 @@
 # monthly_backup.sh
 # creator: Mike O'Shea 
-# Updated: 07/05/2021 
+# Updated: 08/05/2021 
 # Creates a singe zip file backup of the key folders 
 # and config files specified in the last column 
 # of the zip commands.
@@ -29,9 +29,16 @@ zip -r -Z bzip2 /storage/$name 	/etc/samba/smb.conf
 zip -r -Z bzip2 /storage/$name 	/home/mike/.vimrc
 zip -r -Z bzip2 /storage/$name 	/home/mike/.gitconfig
 zip -r -Z bzip2 /storage/$name 	/home/mike/.bashrc
+zip -r -Z bzip2 /storage/$name 	/home/mike/.ssh
 zip -r -Z bzip2 /storage/$name	/home/mike/.tmux.conf
 zip -r -Z bzip2 /storage/$name  /etc/nginx/nginx.conf
-zip -r -Z bzip2 /storage/$name	/home/mike/.config/transmission-daemon/settings.json
+# zip -r -Z bzip2 /storage/$name	/home/mike/.config/transmission-daemon/settings.json
+
+# The permissions for the folder won't let it be added to the zip, so I am
+# copying it and trying backing up the copy.
+cp /home/mike/.config/transmission-daemon/settings.json /tmp/settings.json
+zip -r -Z bzip2 /storage/$fnow-config.zip       /tmp/settings.json
+rm /tmp/settings.json
 
 rsync -a -r $name  $target
 

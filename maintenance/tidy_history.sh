@@ -1,6 +1,6 @@
 # tidy_history.sh 
 # creator: Mike O'Shea 
-# Updated: 07/05/2021 
+# Updated: 09/05/2021 
 # I have had problems getting the bash histroy to work as I would like, I managed
 # to get it working adding some code to my Bash configuration in .bashrc. This
 # worked outside of tux, but because tuxanimator was loading multiple Bash shells
@@ -14,6 +14,13 @@
 
 # GNU General Public License, version 3
 
+#!/bin/bash
+
+now=$(date +%Y-%m-%d,%H:%M)
+log='/get_iplayer/lists/script_log.csv'
+
 export HISTFILE=~/.bash_history
 tac "$HISTFILE" | awk '!x[$0]++' > /tmp/tmpfile && tac /tmp/tmpfile > "$HISTFILE"
 rm /tmp/tmpfile
+
+echo "$now,tidy_history.sh,Tidy History File,$HOME" >> $log

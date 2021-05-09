@@ -7,4 +7,4 @@
 # GNU General Public License, version 3
 
 #!/bin/bash
-sudo apt install rsync tmux tmuxinator build-essential git vim ssh fortune cowsay tig
+sudo apt install rsync tmux tmuxinator build-essential git vim ssh fortune cowsay tig mc

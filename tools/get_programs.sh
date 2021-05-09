@@ -1,6 +1,6 @@
 # get_programs.sh 
 # creator: Mike O'Shea 
-# Updated: 07/05/2021 
+# Updated: 08/05/2021 
 # This script downloads the programmes from the BBC site using get-iplayer. 
 # It downloads them, attempts to archive them and for radio programmes it
 # creates a flac copy and adds the file to LMS.
@@ -420,6 +420,6 @@ process_radio_files
 
 notify_me
 
-now=$(date +%Y-%m-%d,%H%M)
+now=$(date +%Y-%m-%d,%H:%M)
 log='/get_iplayer/lists/script_log.csv'
-echo "$now,get_programs,," >> $log
+echo "$now,get_programs,TV and Radio Programs,$archive_server" >> $log
