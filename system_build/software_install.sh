@@ -11,6 +11,7 @@
 
 sudo apt update && sudo apt upgrade
 
+# This fails because there isn't yet a ppa for this version of ubuntu
 sudo add-apt-repository ppa:transmissionbt/ppa
 
 sudo apt install atomicparsley

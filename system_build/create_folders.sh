@@ -11,12 +11,17 @@
 
 #!/bin/bash
 
-sudo groupadd -f musicserver
-sudo groupadd -f www-data
-sudo groupadd -f squeezeboxserver
 sudo adduser squeezeboxserver
+sudo groupadd -f musicserver
+sudo groupadd -f squeezeboxserver
+sudo groupadd -f www-data
+sudo usermod -a -G musicserver $USER
+sudo usermod -a -G www-data $USER
+sudo usermod -a -G squeezeboxserver $USER
 
-sudo usermod -a -G musicserver, www-data, squeezeboxserver $USER
+sudo mkdir -p /backup
+sudo chgrp -R musicserver /backup/
+sudo chmod -R g+rw /backup/
 
 sudo mkdir -p /backups_local
 sudo chgrp -R musicserver /backups_local/
