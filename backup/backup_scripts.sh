@@ -8,20 +8,21 @@
 
 # GNU General Public License, version 3
 
-#!/usr/bin/env bash
+#!/bin/bash
 
 now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
-log='/get_iplayer/lists/script_log.csv'
+local_target='/backups_local/'
+log=$target'script_log.csv'
 backup_source='/scripts/'
-target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
+remote_target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
 
 x=`find $backup_source -mmin +1 -mmin -1020 -ls`
 echo $x
 if [ ! -z "$x" ] 
 then
-    backup_file="/tmp/$fnow-scripts_backup.zip"
+    backup_file="$local_target$fnow-scripts_backup.zip"
     zip -r $backup_file $backup_source -i '*.sh'
-    rsync -a -r "$backup_file" "$target"
-    echo "$now,backup_scripts.sh,$backup_file,$target" >> $log
+    rsync -a -r "$backup_file" "$remote_target"
+    echo "$now,backup_scripts.sh,$backup_file,$local_target" >> $log
 fi

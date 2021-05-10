@@ -15,19 +15,16 @@
 
 now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
-log='/get_iplayer/lists/script_log.csv'
+target='/backups_local/'
+log=$target'script_log.csv'
 
-zip -r -Z bzip2 /storage/$fnow-web_site.zip 	/var/www/html/
-zip -r -Z bzip2 /storage/$fnow-get_iplayer.zip  /get_iplayer/  -x "*.mp4" "*.flac" "*.m4a"
-zip -r -Z bzip2 /storage/$fnow-scripts.zip 	/scripts/
-zip -r -Z bzip2 /storage/$fnow-history.zip 	/home/mike/.get_iplayer/
-zip -r -Z bzip2 /storage/$fnow-config.zip 	/etc/fstab
-zip -r -Z bzip2 /storage/$fnow-config.zip 	/etc/samba/smb.conf
-zip -r -Z bzip2 /storage/$fnow-config.zip	/etc/nginx/nginx.conf
-# The permissions for the folder won't let it be added to the zip, so I am
-# copying it and trying backing up the copy.
-cp /home/mike/.config/transmission-daemon/settings.json /tmp/settings.json
-zip -r -Z bzip2 /storage/$fnow-config.zip 	/tmp/settings.json
-rm /tmp/settings.json
+zip -r -Z bzip2 $target$fnow-config.zip		/etc/nginx/nginx.conf
+zip -r -Z bzip2 $target$fnow-config.zip		/etc/transmission-daemon/settings.json
+zip -r -Z bzip2 $target$fnow-config.zip 	/etc/fstab
+zip -r -Z bzip2 $target$fnow-config.zip 	/etc/samba/smb.conf
+zip -r -Z bzip2 $target$fnow-get_iplayer.zip	/get_iplayer/  -x "*.mp4" "*.flac" "*.m4a"
+zip -r -Z bzip2 $target$fnow-history.zip 	/home/mike/.get_iplayer/
+zip -r -Z bzip2 $target$fnow-scripts.zip 	/scripts/
+zip -r -Z bzip2 $target$fnow-web_site.zip 	/var/www/html/
 
-echo "$now,backup_build.sh,Various,/storage/" >> $log
+echo "$now,backup_build.sh,Various,$target" >> $log

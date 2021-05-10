@@ -9,26 +9,25 @@
 
 # GNU General Public License, version 3
 
-#!/usr/bin/env bash
+#!/bin/bash
 
 source_folder='/home/mike/.get_iplayer/'
-
 now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
-
-log='/get_iplayer/lists/script_log.csv'
-target='root@192.168.2.4:/mnt/Storage/Media_Share/get_iplayer_history/'
+local_target='/backups_local/'
+log=$target'script_log.csv'
+remote_target='root@192.168.2.4:/mnt/Storage/Media_Share/get_iplayer_history/'
 
 x=`find $source_folder -mmin +1 -mmin -1380 -ls`
 if [ ! -z "$x" ]
 then
-    file_name="$source_folder$fnow-get_iplayer_history.zip"
+    file_name="$local_target$fnow-get_iplayer_history.zip"
     zip -r $file_name "$source_folder""options"
     zip -r $file_name "$source_folder""download_history"
     zip -r $file_name "/get_iplayer/lists/Series_list.txt"
     zip -r $file_name "/get_iplayer/lists/radio_progs.txt"
     zip -r $file_name "/get_iplayer/lists/tv_progs.txt"
-    rsync -a -r "$file_name" "$target"
-    echo "$now,backup_history.sh,$file_name,$target" >> $log
+    rsync -a -r "$file_name" "$remote_target"
+    echo "$now,backup_history.sh,$file_name,$remote_target" >> $log
     rm $file_name
 fi

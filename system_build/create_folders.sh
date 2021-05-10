@@ -18,6 +18,7 @@ sudo groupadd -f www-data
 sudo usermod -a -G musicserver $USER
 sudo usermod -a -G www-data $USER
 sudo usermod -a -G squeezeboxserver $USER
+sudo usermod -a -G debian-transmission $USER
 
 sudo mkdir -p /backup
 sudo chgrp -R musicserver /backup/

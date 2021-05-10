@@ -422,4 +422,4 @@ notify_me
 
 now=$(date +%Y-%m-%d,%H:%M)
 log='/get_iplayer/lists/script_log.csv'
-echo "$now,get_programs,TV and Radio Programs,$archive_server" >> $log
+echo "$now,get_programs.sh,TV and Radio Programs,$archive_server" >> $log

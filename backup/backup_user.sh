@@ -15,14 +15,15 @@
 
 now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
-log='/get_iplayer/lists/script_log.csv'
-file_name=/storage/$fnow-$USER-config.zip
+target='/backups_local/'
+log=$target'script_log.csv'
+file_name=$target$fnow-$USER-config.zig
 
+zip -r -Z bzip2 $file_name	~/.bashrc
 zip -r -Z bzip2 $file_name	~/.config/tmuxinator/
-zip -r -Z bzip2 $file_name      ~/.vimrc
-zip -r -Z bzip2 $file_name      ~/.gitconfig
-zip -r -Z bzip2 $file_name      ~/.bashrc
-zip -r -Z bzip2 $file_name      ~/.ssh
-zip -r -Z bzip2 $file_name      ~/.tmux.conf
+zip -r -Z bzip2 $file_name	~/.gitconfig
+zip -r -Z bzip2 $file_name	~/.ssh
+zip -r -Z bzip2 $file_name	~/.tmux.conf
+zip -r -Z bzip2 $file_name	~/.vimrc
 
-echo "$now,backup_user.sh,$HOME,/storage/" >> $log
+echo "$now,backup_user.sh,$HOME,$target" >> $log
