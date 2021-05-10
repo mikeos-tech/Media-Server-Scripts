@@ -20,6 +20,16 @@ now=$(date +%Y-%m-%d,%H:%M)
 log='/get_iplayer/lists/script_log.csv'
 
 export HISTFILE=~/.bash_history
+export HISTFILESIZE=20000
+export HISTSIZE=10000
+# Combine multiline commands into one in history
+shopt -s cmdhist
+# Ignore duplicates, ls without options and builtin commands
+export HISTIGNORE="&:ls:[bf]g:exit"
+shopt -s histappend
+export HISTCONTROL=ignoreboth:erasedups
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+
 tac "$HISTFILE" | awk '!x[$0]++' > /tmp/tmpfile && tac /tmp/tmpfile > "$HISTFILE"
 rm /tmp/tmpfile
 

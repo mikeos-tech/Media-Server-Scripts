@@ -32,6 +32,10 @@ sudo mkdir -p /backupQ
 sudo chgrp -R musicserver /backupQ/
 sudo chmod -R g+rw /backupQ/
 
+sudo mkdir -p /documenation
+sudo chgrp -R musicserver /documenation/
+sudo chmod -R g+rw /documenation/
+
 # This was something I set up to test NFS
 #sudo mkdir -p /general_share
 #sudo chgrp -R musicserver /general_share/
