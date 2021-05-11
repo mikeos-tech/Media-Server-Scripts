@@ -17,7 +17,7 @@ now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
 target='/backups_local/'
 log=$target'script_log.csv'
-file_name=$target$fnow-$USER-config.zig
+file_name=$target$fnow-$USER-config.zip
 
 zip -r -Z bzip2 $file_name	~/.bashrc
 zip -r -Z bzip2 $file_name	~/.config/tmuxinator/

@@ -21,6 +21,7 @@ sudo apt install cifs-utils
 sudo apt install cpanminus 
 sudo apt install curl
 sudo apt install dconf-editor
+sudo apt install dpkg
 sudo apt install exiftool
 sudo apt install ffmpeg
 sudo apt install flac

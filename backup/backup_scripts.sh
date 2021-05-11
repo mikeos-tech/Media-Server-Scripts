@@ -13,7 +13,7 @@
 now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
 local_target='/backups_local/'
-log=$target'script_log.csv'
+log=$local_target'script_log.csv'
 backup_source='/scripts/'
 remote_target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
 
