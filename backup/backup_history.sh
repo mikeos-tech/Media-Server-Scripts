@@ -17,6 +17,7 @@ fnow=$(date +%Y%m%d-%H%M)
 local_target='/backups_local/'
 log=$target'script_log.csv'
 remote_target='root@192.168.2.4:/mnt/Storage/Media_Share/get_iplayer_history/'
+completed=N
 
 x=`find $source_folder -mmin +1 -mmin -1380 -ls`
 if [ ! -z "$x" ]
@@ -28,6 +29,8 @@ then
     zip -r $file_name "/get_iplayer/lists/radio_progs.txt"
     zip -r $file_name "/get_iplayer/lists/tv_progs.txt"
     rsync -a -r "$file_name" "$remote_target"
-    echo "$now,backup_history.sh,$file_name,$remote_target" >> $log
+    completed=Y
     rm $file_name
 fi
+echo "$now,backup_history.sh,$file_name,$remote_target,$completed" >> $log
+

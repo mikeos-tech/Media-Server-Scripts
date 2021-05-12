@@ -16,6 +16,7 @@ local_target='/backups_local/'
 log=$local_target'script_log.csv'
 backup_source='/scripts/'
 remote_target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
+completed=N
 
 x=`find $backup_source -mmin +1 -mmin -1020 -ls`
 echo $x
@@ -24,5 +25,7 @@ then
     backup_file="$local_target$fnow-scripts_backup.zip"
     zip -r $backup_file $backup_source -i '*.sh'
     rsync -a -r "$backup_file" "$remote_target"
-    echo "$now,backup_scripts.sh,$backup_file,$local_target" >> $log
+    completed=Y
 fi
+echo "$now,backup_scripts.sh,$backup_file,$local_target,$completed" >> $log
+
