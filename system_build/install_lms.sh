@@ -23,7 +23,12 @@ sudo usermod -a -G squeezeboxserver squeezeboxserver
 sudo chown squeezeboxserver:squeezeboxserver /var/run/logitechmediaserver
 sudo chown squeezeboxserver:squeezeboxserver /var/lib/squeezeboxserver
 sudo chown -R squeezeboxserver:squeezeboxserver /var/lib/squeezeboxserver/*
-sudo chown -R squeezeboxserver:squeezeboxserver /storage/xport
+sudo chown -R squeezeboxserver:squeezeboxserver /storage/
+
+sudo usermod -a -G squeezeboxserver $USER
+
+sudo chown -R squeezeboxserver:squeezeboxserver /storage/
+sudo chmod -R g+rw /storage/
 
 sudo systemctl daemon-reload
 /etc/init.d/logitechmediaserver start

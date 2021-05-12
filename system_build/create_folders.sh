@@ -11,13 +11,13 @@
 
 #!/bin/bash
 
-sudo adduser squeezeboxserver
+#sudo adduser squeezeboxserver
 sudo groupadd -f musicserver
-sudo groupadd -f squeezeboxserver
+#sudo groupadd -f squeezeboxserver
 sudo groupadd -f www-data
 sudo usermod -a -G musicserver $USER
 sudo usermod -a -G www-data $USER
-sudo usermod -a -G squeezeboxserver $USER
+#sudo usermod -a -G squeezeboxserver $USER
 sudo usermod -a -G debian-transmission $USER
 
 sudo mkdir -p /backup
@@ -57,7 +57,8 @@ sudo chgrp -R musicserver /scripts/
 sudo chmod -R 777 /scripts/
 
 sudo mkdir -p /storage
-sudo chown -R squeezeboxserver:squeezeboxserver /storage/
+#sudo chown -R squeezeboxserver:squeezeboxserver /storage/
+sudo chown -R mike:mike /storage/
 sudo chmod -R g+rw /storage/
 
 
