@@ -35,6 +35,8 @@ radio_archive=$archive_root'Radio_Programes/'
 
 database='/get_iplayer/database/get-iplayer_log.db'
 
+completed=N
+
 declare -a TV_Programs=()
 declare -a Radio_Programs=()
 declare -a categorise_Programs=()
@@ -156,7 +158,7 @@ function process_tv_files {
                 if [[ $temp =~ (.*)-\ *[Ss]eries_[0-9]+ ]]; then
                     filename="${BASH_REMATCH[1]}"
                     temp=$filename
-                fi
+	   	fi
                 if [[ $temp =~ (.*)-\ *[Ss]eason_[0-9]+ ]]; then
                     filename="${BASH_REMATCH[1]}"
                 fi
@@ -382,6 +384,7 @@ function notify_me {
             echo "${var}" >> "$app_root"TV_progs.txt
         done
         cat "$app_root"TV_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
+	completed=Y
     fi
 
     if (( ${#Radio_Programs[@]} )); then
@@ -392,6 +395,7 @@ function notify_me {
             echo "${var}" >> "$app_root"Radio_progs.txt
         done
         cat "$app_root"Radio_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
+	completed=Y
     fi
 
     if (( ${#categorise_Programs[@]} )); then
@@ -402,6 +406,7 @@ function notify_me {
             echo "${var}" >> "$app_root"Cat_progs.txt
         done
         cat "$app_root"Cat_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
+	completed=Y
     fi
 }
 
@@ -421,5 +426,5 @@ process_radio_files
 notify_me
 
 now=$(date +%Y-%m-%d,%H:%M)
-log='/get_iplayer/lists/script_log.csv'
-echo "$now,get_programs.sh,TV and Radio Programs,$archive_server" >> $log
+log='/backups_local/script_log.csv'
+echo "$now,get_programs.sh,TV and Radio Programs,$archive_server,$completed" >> $log

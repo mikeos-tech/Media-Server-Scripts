@@ -17,7 +17,9 @@
 #!/bin/bash
 
 now=$(date +%Y-%m-%d,%H:%M)
-log='/get_iplayer/lists/script_log.csv'
+log='/backups_local/script_log.csv'
+completed=Y
+tmp_file='/tmp/hist_sort'
 
 export HISTFILE=~/.bash_history
 export HISTFILESIZE=20000
@@ -25,12 +27,13 @@ export HISTSIZE=10000
 # Combine multiline commands into one in history
 shopt -s cmdhist
 # Ignore duplicates, ls without options and builtin commands
-export HISTIGNORE="&:ls:[bf]g:exit"
+export HISTIGNORE="&:ls:[bf]g:exit:clear:"
 shopt -s histappend
 export HISTCONTROL=ignoreboth:erasedups
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
-tac "$HISTFILE" | awk '!x[$0]++' > /tmp/tmpfile && tac /tmp/tmpfile > "$HISTFILE"
-rm /tmp/tmpfile
+tac "$HISTFILE" | awk '!x[$0]++' > $tmp_file 
+tac $tmp_file > "$HISTFILE"
+# rm $tmp_file
 
-echo "$now,tidy_history.sh,Tidy History File,$HOME" >> $log
+echo "$now,tidy_history.sh,$HISTFILE,$HOME,$completed" >> $log

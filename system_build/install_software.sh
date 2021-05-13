@@ -9,6 +9,9 @@
 
 #!/bin/bash
 
+# you need to set the command below to the correct timezone for you.
+sudo timedatectl set-timezone Europe/London
+
 sudo apt update && sudo apt upgrade
 
 # This fails because there isn't yet a ppa for this version of ubuntu
@@ -47,6 +50,7 @@ sudo apt install sqlite3
 sudo apt install ssh
 sudo apt install ssmtp
 sudo apt install transmission
+sudo apt install tree
 sudo apt install ttps-perl 
 sudo apt install zip
 

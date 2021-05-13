@@ -18,6 +18,7 @@ fnow=$(date +%Y%m%d-%H%M)
 target='/backups_local/'
 log=$target'script_log.csv'
 file_name=$target$fnow-$USER-config.zip
+completed=Y
 
 zip -r -Z bzip2 $file_name	~/.bashrc
 zip -r -Z bzip2 $file_name	~/.config/tmuxinator/
@@ -26,4 +27,4 @@ zip -r -Z bzip2 $file_name	~/.ssh
 zip -r -Z bzip2 $file_name	~/.tmux.conf
 zip -r -Z bzip2 $file_name	~/.vimrc
 
-echo "$now,backup_user.sh,$HOME,$target" >> $log
+echo "$now,backup_user.sh,$HOME,$file_name,$completed" >> $log

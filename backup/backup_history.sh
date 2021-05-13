@@ -15,7 +15,7 @@ source_folder='/home/mike/.get_iplayer/'
 now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
 local_target='/backups_local/'
-log=$target'script_log.csv'
+log=$local_target'script_log.csv'
 remote_target='root@192.168.2.4:/mnt/Storage/Media_Share/get_iplayer_history/'
 completed=N
 
@@ -30,7 +30,6 @@ then
     zip -r $file_name "/get_iplayer/lists/tv_progs.txt"
     rsync -a -r "$file_name" "$remote_target"
     completed=Y
-    rm $file_name
+#    rm $file_name
 fi
 echo "$now,backup_history.sh,$file_name,$remote_target,$completed" >> $log
-

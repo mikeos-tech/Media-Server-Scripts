@@ -19,6 +19,7 @@ target='/backups_local/'
 name="$target$fnow-media_server.zip"
 log=$target'script_log.csv'
 remote_target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
+completed=N
 
 zip -r -Z bzip2 $name	/documenation/
 zip -r -Z bzip2 $name	/etc/fstab
@@ -39,6 +40,7 @@ zip -r -Z bzip2 $name	/var/www/html/
 rsync -a -r $name  $remote_target
 
 if [ $? -eq 0 ]; then
-	echo "$now,backup_monthly.sh,$name,$remote_target" >> $log
-	rm $name
+	completed=Y
+#	rm $name
 fi
+echo "$now,backup_monthly.sh,$name,$remote_target,$completed" >> $log
