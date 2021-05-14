@@ -1,7 +1,7 @@
 # tidy_history.sh 
 # creator: Mike O'Shea 
 # Updated: 09/05/2021 
-# I have had problems getting the bash histroy to work as I would like, I managed
+# I have had problems getting the bash history to work as I would like, I managed
 # to get it working adding some code to my Bash configuration in .bashrc. This
 # worked outside of tux, but because tuxanimator was loading multiple Bash shells
 # at the same time it caused confusion with temp files.
@@ -21,19 +21,25 @@ log='/backups_local/script_log.csv'
 completed=Y
 tmp_file='/tmp/hist_sort'
 
+tmux kill-server
+
 export HISTFILE=~/.bash_history
 export HISTFILESIZE=20000
 export HISTSIZE=10000
-# Combine multiline commands into one in history
+# Combine multi line commands into one in history
 shopt -s cmdhist
-# Ignore duplicates, ls without options and builtin commands
+# Ignore duplicates, ls without options and built-in commands
 export HISTIGNORE="&:ls:[bf]g:exit:clear:"
 shopt -s histappend
 export HISTCONTROL=ignoreboth:erasedups
 export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
-tac "$HISTFILE" | awk '!x[$0]++' > $tmp_file 
-tac $tmp_file > "$HISTFILE"
+cat $HISTFILE | sort | uniq -u > $tmp_file
+mv $tmp_file $HISTFILE
+# tac "$HISTFILE" | awk '!x[$0]++' > $tmp_file 
+# tac $tmp_file > "$HISTFILE"
 # rm $tmp_file
+
+tmuxinator webdev
 
 echo "$now,tidy_history.sh,$HISTFILE,$HOME,$completed" >> $log

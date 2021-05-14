@@ -17,6 +17,7 @@ now=$(date +%Y-%m-%d,%H:%M)
 fnow=$(date +%Y%m%d-%H%M)
 target='/backups_local/'
 log=$target'script_log.csv'
+complete=Y
 
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/nginx/nginx.conf
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/transmission-daemon/settings.json
@@ -28,4 +29,4 @@ zip -r -Z bzip2 $target$fnow-history.zip 	/home/mike/.get_iplayer/
 zip -r -Z bzip2 $target$fnow-scripts.zip 	/scripts/
 zip -r -Z bzip2 $target$fnow-web_site.zip 	/var/www/html/
 
-echo "$now,backup_build.sh,Various,$target" >> $log
+echo "$now,backup_build.sh,Various,$targeti,$complete" >> $log
