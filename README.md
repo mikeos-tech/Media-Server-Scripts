@@ -1,9 +1,14 @@
 # Media Server Scripts 
 A collection of scripts that I use within the Music/Media Server.
 The scripts are in sub-folder categories:
--backup 
+-backup
+    - Scripts that backup aspects of the server, some backup the build process, other elements that change and that are important to protect like the get-iplayer history file.
 -maintenance
+    - Tools that carry out tasks that are useful to keep the server working well
 -system build
+    - Scripts that automate the build process
+-tools
+    - scripts that fulfil a function of the server.
 
 This is part of what will be a bigger project - building a Music/Media Server.
 
@@ -36,6 +41,6 @@ I'm not claiming any expertise or that how I do this will be the only, or the be
 
 I am hoping that you will be inspired to experiment and to learn, what would you like to have your server do?
 
-As part of this I'm using and learning tools like *vim*, *tmux*, *ssh*, *git* and github.  I've been using Linux for a long time but have been working mainly within the KDE desktop GUI recently, I'm enjoying getting back to the command line and learning a lot.
+As part of this I'm using and learning tools like *vim*, *tmux*, *ssh*, *git* and GitHub.  I've been using Linux for a long time but have been working mainly within the KDE desktop GUI recently, I'm enjoying getting back to the command line and learning a lot.
 
 Mike
