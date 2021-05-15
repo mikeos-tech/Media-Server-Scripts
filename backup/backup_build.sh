@@ -29,4 +29,4 @@ zip -r -Z bzip2 $target$fnow-history.zip 	/home/mike/.get_iplayer/
 zip -r -Z bzip2 $target$fnow-scripts.zip 	/scripts/
 zip -r -Z bzip2 $target$fnow-web_site.zip 	/var/www/html/
 
-echo "$now,backup_build.sh,Various,$targeti,$complete" >> $log
+echo "$now,backup_build.sh,Various,$target,$complete" >> $log

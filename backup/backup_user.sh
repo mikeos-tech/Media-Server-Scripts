@@ -26,5 +26,6 @@ zip -r -Z bzip2 $file_name	~/.gitconfig
 zip -r -Z bzip2 $file_name	~/.ssh
 zip -r -Z bzip2 $file_name	~/.tmux.conf
 zip -r -Z bzip2 $file_name	~/.vimrc
+zip -r -Z bzip2 $file_name	~/.vim_spell
 
 echo "$now,backup_user.sh,$HOME,$file_name,$completed" >> $log

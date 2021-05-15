@@ -23,23 +23,21 @@ tmp_file='/tmp/hist_sort'
 
 tmux kill-server
 
-export HISTFILE=~/.bash_history
-export HISTFILESIZE=20000
-export HISTSIZE=10000
+HISTFILE=~/.bash_history
+# export HISTFILESIZE=20000
+# export HISTSIZE=10000
 # Combine multi line commands into one in history
-shopt -s cmdhist
+# shopt -s cmdhist
 # Ignore duplicates, ls without options and built-in commands
-export HISTIGNORE="&:ls:[bf]g:exit:clear:"
-shopt -s histappend
-export HISTCONTROL=ignoreboth:erasedups
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+# export HISTIGNORE="&:ls:[bf]g:exit:clear:"
+# shopt -s histappend
+# export HISTCONTROL=ignoreboth:erasedups
+# export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
 
 cat $HISTFILE | sort | uniq -u > $tmp_file
 mv $tmp_file $HISTFILE
 # tac "$HISTFILE" | awk '!x[$0]++' > $tmp_file 
 # tac $tmp_file > "$HISTFILE"
 # rm $tmp_file
-
-tmuxinator webdev
 
 echo "$now,tidy_history.sh,$HISTFILE,$HOME,$completed" >> $log
