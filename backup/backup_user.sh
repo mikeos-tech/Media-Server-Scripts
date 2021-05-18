@@ -1,6 +1,6 @@
 # backup_build.sh
 # creator: Mike O'Shea 
-# Updated: 08/05/2021 
+# Updated: 18/05/2021 
 # Creates zip file backups of the key folders and config files
 # specified in the last column of the zip commands.
 # It records when it runs if the defined log file.
@@ -25,7 +25,10 @@ zip -r -Z bzip2 $file_name	~/.config/tmuxinator/
 zip -r -Z bzip2 $file_name	~/.gitconfig
 zip -r -Z bzip2 $file_name	~/.ssh
 zip -r -Z bzip2 $file_name	~/.tmux.conf
-zip -r -Z bzip2 $file_name	~/.vimrc
+zip -r -Z bzip2 $file_name	~/.uncrustify.cfg
+zip -r -Z bzip2 $file_name	~/.uncrustify/
+zip -r -Z bzip2 $file_name	~/.vim
 zip -r -Z bzip2 $file_name	~/.vim_spell
+zip -r -Z bzip2 $file_name	~/.vimrc
 
 echo "$now,backup_user.sh,$HOME,$file_name,$completed" >> $log
