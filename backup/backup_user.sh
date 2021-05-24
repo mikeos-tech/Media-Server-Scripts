@@ -20,9 +20,13 @@ log=$target'script_log.csv'
 file_name=$target$fnow-$USER-config.zip
 completed=Y
 
+zip -r -Z bzip2 $file_name	~/.bash_history
+zip -r -Z bzip2 $file_name	~/.bash_logout
+zip -r -Z bzip2 $file_name	~/.bash_profile
 zip -r -Z bzip2 $file_name	~/.bashrc
 zip -r -Z bzip2 $file_name	~/.config/tmuxinator/
 zip -r -Z bzip2 $file_name	~/.gitconfig
+zip -r -Z bzip2 $file_name	~/.profile
 zip -r -Z bzip2 $file_name	~/.ssh
 zip -r -Z bzip2 $file_name	~/.tmux.conf
 zip -r -Z bzip2 $file_name	~/.uncrustify.cfg
