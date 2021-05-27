@@ -1,6 +1,6 @@
 # backup_build.sh
 # creator: Mike O'Shea 
-# Updated: 26/05/2021 
+# Updated: 27/05/2021 
 # Creates zip file backups of the key folders server specific 
 # config files, specified in the last column of the zip commands.
 # It records when it runs if the defined log file.
@@ -19,6 +19,7 @@ target='/backups_local/'
 log=$target'script_log.csv'
 complete=Y
 
+zip -r -Z bzip2 $target$fnow-config.zip		/etc/apt/sources.list
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/backupQ.conf
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/fstab
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/git_sync.conf
