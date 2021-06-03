@@ -49,10 +49,11 @@ sudo apt install samba
 sudo apt install sqlite3
 sudo apt install ssh
 sudo apt install ssmtp
-sudo apt install transmission
+sudo apt-get install transmission-cli transmission-common transmission-daemon
 sudo apt install tree
 sudo apt install ttps-perl 
 sudo apt install zip
+sudo apt install -y usbmount
 
 sudo apt install ca-certificates
 sudo update-ca-certificates
