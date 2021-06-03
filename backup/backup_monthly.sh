@@ -24,6 +24,7 @@ completed=N
 zip -r -Z bzip2 $name	/documenation/
 zip -r -Z bzip2 $name	/etc/dnsmasq.conf
 zip -r -Z bzip2 $name	/etc/fstab
+zip -r -Z bzip2 $name	/etc/hosts
 zip -r -Z bzip2 $name	/etc/nginx/nginx.conf
 zip -r -Z bzip2 $name	/etc/resolv.conf
 zip -r -Z bzip2 $name	/etc/samba/smb.conf
