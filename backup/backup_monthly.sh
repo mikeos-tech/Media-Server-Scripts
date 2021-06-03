@@ -22,8 +22,10 @@ remote_target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
 completed=N
 
 zip -r -Z bzip2 $name	/documenation/
+zip -r -Z bzip2 $name	/etc/dnsmasq.conf
 zip -r -Z bzip2 $name	/etc/fstab
 zip -r -Z bzip2 $name	/etc/nginx/nginx.conf
+zip -r -Z bzip2 $name	/etc/resolv.conf
 zip -r -Z bzip2 $name	/etc/samba/smb.conf
 zip -r -Z bzip2 $name	/etc/transmission-daemon/settings.json
 zip -r -Z bzip2 $name	/get_iplayer/  -x "*.mp4" "*.flac" "*.m4a"
@@ -34,6 +36,7 @@ zip -r -Z bzip2 $name	/home/mike/.gitconfig
 zip -r -Z bzip2 $name	/home/mike/.ssh
 zip -r -Z bzip2 $name	/home/mike/.tmux.conf
 zip -r -Z bzip2 $name	/home/mike/.vimrc
+zip -r -Z bzip2 $name	/home/mike/projects/
 zip -r -Z bzip2 $name	/scripts/
 zip -r -Z bzip2 $name	/var/www/html/
 
