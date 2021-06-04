@@ -24,6 +24,7 @@ zip -r -Z bzip2 $target$fnow-config.zip		/etc/backupQ.conf
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/dnsmasq.conf
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/fstab
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/git_sync.conf
+zip -r -Z bzip2 $target$fnow-config.zip		/etc/hosts
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/nginx/nginx.conf
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/nginx/sites-available/default
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/resolv.conf

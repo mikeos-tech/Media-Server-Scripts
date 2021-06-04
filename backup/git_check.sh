@@ -20,6 +20,7 @@ declare -a git_paths=(
 
 # Iterate the string array using for loop
 for val in ${git_paths[@]}; do
+	echo $val
 	cd $val
 	git add .
 	git commit -m 'Over Night Update'
