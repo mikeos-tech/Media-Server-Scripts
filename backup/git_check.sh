@@ -14,8 +14,8 @@ declare -a git_paths=(
 "/scripts/"
 "/var/www/html/"
 "~/.vim_spell"
-"~/projects/backupQ"
-"~/projects/git_sync_project"
+"~/projects/backupQ/"
+"~/projects/git_sync_project/"
 )
 
 # Iterate the string array using for loop
