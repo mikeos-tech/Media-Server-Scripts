@@ -2,25 +2,24 @@
 # creator: Mike O'Shea 
 # Updated: 04/06/2021 
 # Iterates an array of paths pointing to git repositories and ensures
-# everything is included within the repository and that it
-# is updated in GitHub.
+# everything is included within the local repository and that it
+# is synchronised with the Online repository.
 
 # GNU General Public License, version 3
 
 #!/bin/bash
 
 declare -a git_paths=(
-"/documentation/"
-"/scripts/"
-"/var/www/html/"
 "$HOME/.vim_spell"
 "$HOME/projects/backupQ/"
 "$HOME/projects/git_sync_project/"
+"/documentation/"
+"/scripts/"
+"/var/www/html/"
 )
 
-# Iterate the string array using for loop
+# Iterate the list of paths using for loop
 for val in ${git_paths[@]}; do
-	echo $val
 	cd $val
 	git add .
 	git commit -m 'Over Night Update'
