@@ -41,6 +41,12 @@ declare -a TV_Programs=()
 declare -a Radio_Programs=()
 declare -a categorise_Programs=()
 
+function remove_illegal {
+	# Remove any illegal characters from the paths
+	local the_path=$(echo $1 | tr -d "\'")
+	the_path=$(echo $the_path | tr -d ':;,&<>')
+	echo $the_path
+}
 
 function get_genre {
 	# Read the genre and if it finds something appropriate convert it to one of my equivalents
@@ -210,8 +216,10 @@ function process_tv_files {
 			fi
 
 			# Remove any illegal characters from the paths
-			archive_path=$(echo $archive_path | tr -d "\'")
-			archive_path=$(echo $archive_path | tr -d ':;,&<>')
+			archive_path=$(remove_illegal $archive_path)
+
+#			archive_path=$(echo $archive_path | tr -d "\'")
+#			archive_path=$(echo $archive_path | tr -d ':;,&<>')
 
 			# The folder paths have been created, now append the target file name before the copy/move takes place
 			if [ "$before" != "$filename" ]; then  # If the file name has been modified during the processing
@@ -220,8 +228,9 @@ function process_tv_files {
 				path=$( echo ${eachfile%/*} )
 				new_name="$path/$filename"
 				# Remove any illegal characters from the strings after filename has been added, the folder paths were check before they were created and then the file name was added
-				new_name=$(echo $new_name | tr -d "\'")
-				new_name=$(echo $new_name | tr -d ':;,&<>')
+				new_name=$(remove_illegal $new_name)
+#				new_name=$(echo $new_name | tr -d "\'")
+#				new_name=$(echo $new_name | tr -d ':;,&<>')
 				mv $eachfile $new_name
 			else # If file name remains the same
 				new_name=$eachfile
@@ -299,7 +308,8 @@ function process_radio_files {
 				folder_path+="/"
 			fi
 
-			folder_path=$(echo␣$folder_path␣|␣tr␣-d␣':;.,&<>?')¬
+			folder_path=$(remove_illegal $folder_path)
+#			folder_path=$(echo␣$folder_path␣|␣tr␣-d␣':;.,&<>?')
 
 			archive_path=$radio_archive
 			archive_path+=$folder_path
