@@ -1,6 +1,6 @@
 # get_programs.sh 
 # creator: Mike O'Shea 
-# Updated: 08/05/2021 
+# Updated: 06/06/2021 
 # This script downloads the programmes from the BBC site using get-iplayer. 
 # It downloads them, attempts to archive them and for radio programmes it
 # creates a flac copy and adds the file to LMS.
@@ -45,7 +45,8 @@ function remove_illegal {
 	# Remove any illegal characters from the paths
 	local the_path=$(echo $1 | tr -d "\'")
 	the_path=$(echo $the_path | tr -d ':;,&<>')
-	the_path="${the_path//./}"
+	# The removing the dots element is separately in the code to apply to the paths, not to the file names.
+#	the_path="${the_path//./}"
 	echo $the_path
 }
 
@@ -218,6 +219,7 @@ function process_tv_files {
 
 			# Remove any illegal characters from the paths
 			archive_path=$(remove_illegal $archive_path)
+			archive_path="${archive_path//./}"
 
 #			archive_path=$(echo $archive_path | tr -d "\'")
 #			archive_path=$(echo $archive_path | tr -d ':;,&<>')
@@ -309,7 +311,11 @@ function process_radio_files {
 				folder_path+="/"
 			fi
 
+			# Remove illegal characters from the path
 			folder_path=$(remove_illegal $folder_path)
+			# Remove all dots from the path
+			folder_path="${folder_path//./}"
+
 #			folder_path=$(echo␣$folder_path␣|␣tr␣-d␣':;.,&<>?')
 
 			archive_path=$radio_archive
@@ -320,8 +326,10 @@ function process_radio_files {
 			path=$( echo ${eachfile%/*} )
 			file=$( echo ${eachfile##/*/} )
 			local new_name="$path/$creation_date$file"
-			cp $eachfile $new_name
+			# Remove illegal characters from the full path, including the name
+			new_name=$(remove_illegal $new_name)
 
+			cp $eachfile $new_name
 			ssh $archive_server "mkdir -p $archive_path"
 			rsync -a -r -p "$new_name" "$archive_server:$archive_path"
 			if [ "$?" -eq "0" ]
