@@ -45,6 +45,7 @@ function remove_illegal {
 	# Remove any illegal characters from the paths
 	local the_path=$(echo $1 | tr -d "\'")
 	the_path=$(echo $the_path | tr -d ':;,&<>')
+	the_path="${the_path//./}"
 	echo $the_path
 }
 
