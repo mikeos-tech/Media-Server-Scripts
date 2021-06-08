@@ -47,6 +47,8 @@ function remove_illegal {
 	the_path=$(echo $the_path | tr -d ':;,&<>')
 	# The removing the dots element is separately in the code to apply to the paths, not to the file names.
 #	the_path="${the_path//./}"
+	# Replace the spaces with underscores
+	the_path=${the_path// /_}
 	echo $the_path
 }
 
@@ -227,7 +229,6 @@ function process_tv_files {
 			# The folder paths have been created, now append the target file name before the copy/move takes place
 			if [ "$before" != "$filename" ]; then  # If the file name has been modified during the processing
 				temp=$filename
-				filename=${temp// /_}
 				path=$( echo ${eachfile%/*} )
 				new_name="$path/$filename"
 				# Remove any illegal characters from the strings after filename has been added, the folder paths were check before they were created and then the file name was added
