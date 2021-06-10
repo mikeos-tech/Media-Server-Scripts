@@ -21,7 +21,7 @@ log=$target'script_log.csv'
 remote_target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
 completed=N
 
-zip -r -Z bzip2 $name	/documenation/
+zip -r -Z bzip2 $name	/documentation/
 zip -r -Z bzip2 $name	/etc/dnsmasq.conf
 zip -r -Z bzip2 $name	/etc/fstab
 zip -r -Z bzip2 $name	/etc/hosts

@@ -30,7 +30,7 @@ zip -r -Z bzip2 $target$fnow-config.zip		/etc/nginx/sites-available/default
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/resolv.conf
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/samba/smb.conf
 zip -r -Z bzip2 $target$fnow-config.zip		/etc/transmission-daemon/settings.json
-zip -r -Z bzip2 $target$fnow-documenation 	/documenation/
+zip -r -Z bzip2 $target$fnow-documentation 	/documentation/
 zip -r -Z bzip2 $target$fnow-get_iplayer.zip	/get_iplayer/  -x "*.mp4" "*.flac" "*.m4a"
 zip -r -Z bzip2 $target$fnow-history.zip 	/home/mike/.get_iplayer/
 zip -r -Z bzip2 $target$fnow-scripts.zip 	/scripts/
