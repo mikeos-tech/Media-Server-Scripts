@@ -1,10 +1,11 @@
 # backup_scripts.sh 
 # creator: Mike O'Shea 
-# Updated: 07/05/2021 
+# Updated: 16/06/2021 
 # Creates a zip file backup of script files in both the /scripts folder
 # and the /get_iplayer folder.
 # The created zip file is transfered to the NAS and the local file
 # removed.
+# Copies the script files in this folder to another  folder of script files.
 
 # GNU General Public License, version 3
 
@@ -26,6 +27,7 @@ then
     zip -r $backup_file $backup_source -i '*.sh'
     rsync -a -r "$backup_file" "$remote_target"
     completed=Y
+    rsync -a --exclude='.git/' --include '*/' --include '*.sh' --exclude '.gitignore' --exclude '*' /scripts/ /scripts_library/musicmachine
 fi
 echo "$now,backup_scripts.sh,$backup_file,$local_target,$completed" >> $log
 

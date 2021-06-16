@@ -1,6 +1,6 @@
 # git_check.sh 
 # creator: Mike O'Shea 
-# Updated: 04/06/2021 
+# Updated: 16/06/2021 
 # Iterates an array of paths pointing to git repositories and ensures
 # everything is included within the local repository and that it
 # is synchronised with the Online repository.
@@ -15,6 +15,7 @@ declare -a git_paths=(
 "$HOME/projects/git_sync_project/"
 "/documentation/"
 "/scripts/"
+"/scripts_library/
 "/var/www/html/"
 )
 
