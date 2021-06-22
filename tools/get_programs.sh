@@ -1,6 +1,6 @@
 # get_programs.sh 
 # creator: Mike O'Shea 
-# Updated: 06/06/2021 
+# Updated: 22/06/2021 
 # This script downloads the programmes from the BBC site using get-iplayer. 
 # It downloads them, attempts to archive them and for radio programmes it
 # creates a flac copy and adds the file to LMS.
@@ -44,7 +44,7 @@ declare -a categorise_Programs=()
 function remove_illegal {
 	# Remove any illegal characters from the paths
 	local the_path=$(echo $1 | tr -d "\'")
-	the_path=$(echo $the_path | tr -d ':;,&<>')
+	the_path=$(echo $the_path | tr -d ':;,&<>()')
 	# The removing the dots element is separately in the code to apply to the paths, not to the file names.
 #	the_path="${the_path//./}"
 	# Replace the spaces with underscores
