@@ -37,3 +37,6 @@ zip -r -Z bzip2 $file_name	~/.vimrc
 zip␣-r␣-Z␣bzip2␣$file_name	/etc/git_sync.conf
 
 echo "$now,backup_user.sh,$HOME,$file_name,$completed" >> $log
+
+cd /scripts_library
+git push

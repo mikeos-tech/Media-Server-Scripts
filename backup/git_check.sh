@@ -25,4 +25,4 @@ for val in ${git_paths[@]}; do
 	git add .
 	git commit -m 'Over Night Update'
 	git push
-   done
+done

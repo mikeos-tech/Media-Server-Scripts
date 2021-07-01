@@ -21,6 +21,10 @@ log=$target'script_log.csv'
 remote_target='root@192.168.2.4:/mnt/Storage/Dev_Backup/'
 completed=N
 
+rsync -a --exclude='.git/' --include '*/' --include '*.sh' --exclude '.gitignore' --exclude '*' /scripts/ /scripts_library/musicmachine
+cd /scripts_library
+git push
+
 zip -r -Z bzip2 $name	/documentation/
 zip -r -Z bzip2 $name	/etc/dnsmasq.conf
 zip -r -Z bzip2 $name	/etc/fstab
@@ -39,6 +43,7 @@ zip -r -Z bzip2 $name	/home/mike/.tmux.conf
 zip -r -Z bzip2 $name	/home/mike/.vimrc
 zip -r -Z bzip2 $name	/home/mike/projects/
 zip -r -Z bzip2 $name	/scripts/
+zip -r -Z bzip2 $name	/var/lib/squeezeboxserver/prefs
 zip -r -Z bzip2 $name	/var/www/html/
 
 rsync -a -r $name  $remote_target

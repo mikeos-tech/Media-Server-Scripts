@@ -23,11 +23,13 @@ x=`find $backup_source -mmin +1 -mmin -1020 -ls`
 echo $x
 if [ ! -z "$x" ] 
 then
-    backup_file="$local_target$fnow-scripts_backup.zip"
-    zip -r $backup_file $backup_source -i '*.sh'
-    rsync -a -r "$backup_file" "$remote_target"
-    completed=Y
-    rsync -a --exclude='.git/' --include '*/' --include '*.sh' --exclude '.gitignore' --exclude '*' /scripts/ /scripts_library/musicmachine
+	backup_file="$local_target$fnow-scripts_backup.zip"
+	zip -r $backup_file $backup_source -i '*.sh'
+	rsync -a -r "$backup_file" "$remote_target"
+	completed=Y
+	rsync -a --exclude='.git/' --include '*/' --include '*.sh' --exclude '.gitignore' --exclude '*' /scripts/ /scripts_library/musicmachine
+	cd /scripts_library
+	git push
 fi
 echo "$now,backup_scripts.sh,$backup_file,$local_target,$completed" >> $log
 
