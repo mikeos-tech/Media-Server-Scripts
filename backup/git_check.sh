@@ -15,7 +15,7 @@ declare -a git_paths=(
 "$HOME/projects/git_sync_project/"
 "/documentation/"
 "/scripts/"
-"/scripts_library/
+"/scripts_library/"
 "/var/www/html/"
 )
 
