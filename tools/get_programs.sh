@@ -404,6 +404,14 @@ function notify_me {
 		done
 		cat "$app_root"TV_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
 		completed=Y
+
+		echo "Subject: Email Subject: TV Programs @GTD #tv #TV/Media +" >> "$app_root"TV_progs.txt
+		for var in "${TV_Programs[@]}"
+		do
+			echo "${var}" >> "$app_root"TV_progs.txt
+		done
+		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
+
 	fi
 
 	if (( ${#Radio_Programs[@]} )); then
@@ -415,6 +423,13 @@ function notify_me {
 		done
 		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
 		completed=Y
+
+		echo "Subject: Email Subject: Radio Programs @GTD #radio #TV/Media +" >> "$app_root"Radio_progs.txt
+		for var in "${Radio_Programs[@]}"
+		do
+			echo "${var}" >> "$app_root"Radio_progs.txt
+		done
+		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 	fi
 
 	if (( ${#categorise_Programs[@]} )); then
