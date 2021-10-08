@@ -404,11 +404,20 @@ function notify_me {
 		done
 		cat "$app_root"TV_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
 
-		echo "Subject: Email Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
+		echo "Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
 		for var in "${TV_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"TV_progs.txt
 		done
+		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
+
+		echo "Subject: TV Programsi 2 @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
+		echo "<en-note>" >> "$app_root"TV_progs.txt
+		for var in "${TV_Programs[@]}"
+		do
+			echo "<en-todo/>${var}" >> "$app_root"TV_progs.txt
+		done
+		echo "</en-note>" >> "$app_root"TV_progs.txt
 		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 
 		completed=Y
@@ -423,7 +432,7 @@ function notify_me {
 		done
 		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
 
-		echo "Subject: Email Subject: Radio Programs @GTD #radio #TV/Media +" > "$app_root"Radio_progs.txt
+		echo "Subject: Radio Programs @GTD #radio #TV/Media +" > "$app_root"Radio_progs.txt
 		for var in "${Radio_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"Radio_progs.txt
@@ -441,7 +450,7 @@ function notify_me {
 		done
 		cat "$app_root"Cat_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
 
-		echo "Subject: Email Subject: Categorise TV Programs !tomorrow @GTD #tv #TV/Media +" > "$app_root"Cat_progs.txt
+		echo "Subject: Categorise TV Programs !tomorrow @GTD #tv #TV/Media +" > "$app_root"Cat_progs.txt
 		for var in "${categorise_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"Cat_progs.txt
