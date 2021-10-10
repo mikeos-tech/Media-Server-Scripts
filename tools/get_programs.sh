@@ -396,43 +396,16 @@ function add_2_lms {
 function notify_me {
 	download_date=printf date '%(%Y-%m-%d)T' -1
 	if (( ${#TV_Programs[@]} )); then
-#		echo "Subject: $download_date - TV Programs Downloaded" > "$app_root"TV_progs.txt
-#		echo "TV Programs downloaded on $download_date:" >> "$app_root"TV_progs.txt
-#		for var in "${TV_Programs[@]}"
-#		do
-#			echo "${var}" >> "$app_root"TV_progs.txt
-#		done
-#		cat "$app_root"TV_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
-
 		echo "Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
 		for var in "${TV_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"TV_progs.txt
 		done
 		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
-
-		echo "Subject: TV Programs 2 @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
-		echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">\n" >> "$app_root"TV_progs.txt
-		echo "<en-note>" >> "$app_root"TV_progs.txt
-		for var in "${TV_Programs[@]}"
-		do
-			echo "<en-todo/>${var}" >> "$app_root"TV_progs.txt
-		done
-		echo "</en-note>" >> "$app_root"TV_progs.txt
-		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
-
 		completed=Y
 	fi
 
 	if (( ${#Radio_Programs[@]} )); then
-#		echo "Subject: $download_date - Radio Programs Downloaded" > "$app_root"Radio_progs.txt
-#		echo "Radio Programs downloaded on $download_date:" >> "$app_root"Radio_progs.txt
-#		for var in "${Radio_Programs[@]}"
-#		do
-#			echo "${var}" >> "$app_root"Radio_progs.txt
-#		done
-#		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
-
 		echo "Subject: Radio Programs @GTD #radio #TV/Media +" > "$app_root"Radio_progs.txt
 		for var in "${Radio_Programs[@]}"
 		do
