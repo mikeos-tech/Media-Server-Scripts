@@ -416,14 +416,6 @@ function notify_me {
 	fi
 
 	if (( ${#categorise_Programs[@]} )); then
-		echo "Subject: $download_date - TV Programs to be Categorised" > "$app_root"Cat_progs.txt
-		echo "TV Programs put in the categorised folder on $download_date, that don't fit an existing Category definition." >> "$app_root"Cat_progs.txt
-		for var in "${categorise_Programs[@]}"
-		do
-			echo "${var}" >> "$app_root"Cat_progs.txt
-		done
-		cat "$app_root"Cat_progs.txt | ssmtp michaeloshea@blueyonder.co.uk
-
 		echo "Subject: Categorise TV Programs !tomorrow @GTD #tv #TV/Media +" > "$app_root"Cat_progs.txt
 		for var in "${categorise_Programs[@]}"
 		do
