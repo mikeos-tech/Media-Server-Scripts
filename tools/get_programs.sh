@@ -28,7 +28,7 @@ radio_search_criteria="$radio_downloads*.m4a"
 lms_radio_path='/storage/music/flac/radio/'
 
 archive_server='root@192.168.2.4'
-archive_root='/mnt/Storage/Media_Share/'
+archive_root='/mnt/first_pool/Data_Area/Media_Share/'
 tv_archive=$archive_root'TV_Archive/'
 film_archive=$archive_root'Films/'
 radio_archive=$archive_root'Radio_Programes/'
@@ -241,12 +241,20 @@ function process_tv_files {
 			fi
 
 			ssh $archive_server "mkdir -p $archive_path"
-			rsync -a -r -p "$new_name" "$archive_server:$archive_path"
+
+
+
+
+			echo "copy file: "
+			rsync -r -A --no-perms -progress "$new_name" "$archive_server:$archive_path"
+			echo "Done"
+#			sleep 5
+
 			if [ "$?" -eq "0" ]
 			then
 				record="$archive_path$filename"
 				record=${record#"$archive_root"}
-				printf -v date '%(%Y-%m-%d)T' -1
+				printf date '%(+%F)'
 				sqlite3 $database "INSERT INTO updates ( date, path, type ) VALUES( '$date', '$record', 'TV' );"
 				sync
 				rm "$new_name"
@@ -256,7 +264,7 @@ function process_tv_files {
 				fi
 			else
 				echo "Error copying: " $new_name
-				download_date=printf -v date '%(%Y-%m-%d)T' -1
+				download_date=printf date '%(+%F)'
 				echo "Subject: $download_date - TV File Addition Error" > "$app_root"TV_error.txt
 				echo "TV Program downloaded on $download_date could not be added to the TV Archive:" >> "$app_root"TV_error.txt
 				echo "Source: $new_name" >> "$app_root"TV_error.txt
@@ -436,6 +444,9 @@ clear
 get_series  # function that reads the TV & Radio list and downloads them
 get_selected_progs $tv_Program_list     tv
 get_selected_progs $radio_Program_list  radio
+
+clear
+echo "Process Files"
 
 process_tv_files
 process_radio_files
