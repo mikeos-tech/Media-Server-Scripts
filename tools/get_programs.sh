@@ -191,89 +191,81 @@ function process_tv_files {
 					folder_path+="/"
 				fi
 
-			if [ "$genre" == "Music" ]; then
-				archive_path+="hold/"
-			fi
+				if [ "$genre" == "Music" ]; then
+					archive_path+="hold/"
+				fi
 
-			# If there is an series title add it to the path
-			if [ "$series_title" != "" ]; then
-				folder_path+=$series_title
-				folder_path+="/"
-			fi
+				# If there is an series title add it to the path
+				if [ "$series_title" != "" ]; then
+					folder_path+=$series_title
+					folder_path+="/"
+				fi
 
-			# If there is a series number add it to the path
-			if [ "$series_no" != "" ]; then
-				folder_path+="Series_"
-				folder_path+=$series_no
-				folder_path+="/"
-			fi
+				# If there is a series number add it to the path
+				if [ "$series_no" != "" ]; then
+					folder_path+="Series_"
+					folder_path+=$series_no
+					folder_path+="/"
+				fi
 
-			# If the genre is something other than music or file give it the archive and folder path
-			if [ "$genre" != "Films" ]; then
-				archive_path=$tv_archive
-				archive_path+=$folder_path
-			else
-				if [ "$genre" == "Films" ]; then
-					archive_path=$film_archive
+				# If the genre is something other than music or file give it the archive and folder path
+				if [ "$genre" != "Films" ]; then
+					archive_path=$tv_archive
 					archive_path+=$folder_path
+				else
+					if [ "$genre" == "Films" ]; then
+						archive_path=$film_archive
+						archive_path+=$folder_path
+					fi
+				fi
+
+				# Remove any illegal characters from the paths
+				archive_path=$(remove_illegal $archive_path)
+				archive_path="${archive_path//./}"
+
+#				archive_path=$(echo $archive_path | tr -d "\'")
+#				archive_path=$(echo $archive_path | tr -d ':;,&<>')
+
+				# The folder paths have been created, now append the target file name before the copy/move takes place
+				if [ "$before" != "$filename" ]; then  # If the file name has been modified during the processing
+					temp=$filename
+					path=$( echo ${eachfile%/*} )
+					new_name="$path/$filename"
+					# Remove any illegal characters from the strings after filename has been added, the folder paths were check before they were created and then the file name was added
+					new_name=$(remove_illegal $new_name)
+#					new_name=$(echo $new_name | tr -d "\'")
+#					new_name=$(echo $new_name | tr -d ':;,&<>')
+					mv $eachfile $new_name
+				else # If file name remains the same
+					new_name=$eachfile
+				fi
+
+				ssh $archive_server "mkdir -p $archive_path"
+				rsync -r "$new_name" "$archive_server:$archive_path"
+				if [ "$?" -eq "0" ]
+				then
+					record="$archive_path$filename"
+					record=${record#"$archive_root"}
+					printf date '%(+%F)'
+					sqlite3 $database "INSERT INTO updates ( date, path, type ) VALUES( '$date', '$record', 'TV' );"
+					sync
+					rm "$new_name"
+					TV_Programs+=($record)
+					if [ "$genre" == "categorise" ]; then
+						categorise_Programs+=($new_name)
+					fi
+				else
+					echo "Error copying: " $new_name
+					download_date=printf date '%(+%F)'
+					echo "Subject: $download_date - TV File Addition Error" > "$app_root"TV_error.txt
+					echo "TV Program downloaded on $download_date could not be added to the TV Archive:" >> "$app_root"TV_error.txt
+					echo "Source: $new_name" >> "$app_root"TV_error.txt
+					echo "Target: $archive_path" >> "$app_root"TV_error.txt
+					cat "$app_root"TV_error.txt | ssmtp michaeloshea@blueyonder.co.uk
 				fi
 			fi
-
-			# Remove any illegal characters from the paths
-			archive_path=$(remove_illegal $archive_path)
-			archive_path="${archive_path//./}"
-
-#			archive_path=$(echo $archive_path | tr -d "\'")
-#			archive_path=$(echo $archive_path | tr -d ':;,&<>')
-
-			# The folder paths have been created, now append the target file name before the copy/move takes place
-			if [ "$before" != "$filename" ]; then  # If the file name has been modified during the processing
-				temp=$filename
-				path=$( echo ${eachfile%/*} )
-				new_name="$path/$filename"
-				# Remove any illegal characters from the strings after filename has been added, the folder paths were check before they were created and then the file name was added
-				new_name=$(remove_illegal $new_name)
-#				new_name=$(echo $new_name | tr -d "\'")
-#				new_name=$(echo $new_name | tr -d ':;,&<>')
-				mv $eachfile $new_name
-			else # If file name remains the same
-				new_name=$eachfile
-			fi
-
-			ssh $archive_server "mkdir -p $archive_path"
-
-
-
-
-			echo "copy file: "
-			rsync -r -A --no-perms -progress "$new_name" "$archive_server:$archive_path"
-			echo "Done"
-#			sleep 5
-
-			if [ "$?" -eq "0" ]
-			then
-				record="$archive_path$filename"
-				record=${record#"$archive_root"}
-				printf date '%(+%F)'
-				sqlite3 $database "INSERT INTO updates ( date, path, type ) VALUES( '$date', '$record', 'TV' );"
-				sync
-				rm "$new_name"
-				TV_Programs+=($record)
-				if [ "$genre" == "categorise" ]; then
-					categorise_Programs+=($new_name)
-				fi
-			else
-				echo "Error copying: " $new_name
-				download_date=printf date '%(+%F)'
-				echo "Subject: $download_date - TV File Addition Error" > "$app_root"TV_error.txt
-				echo "TV Program downloaded on $download_date could not be added to the TV Archive:" >> "$app_root"TV_error.txt
-				echo "Source: $new_name" >> "$app_root"TV_error.txt
-				echo "Target: $archive_path" >> "$app_root"TV_error.txt
-				cat "$app_root"TV_error.txt | ssmtp michaeloshea@blueyonder.co.uk
-			fi
-		fi
-	done
-fi
+		done
+	fi
 }
 
 function process_radio_files {
@@ -325,8 +317,6 @@ function process_radio_files {
 			# Remove all dots from the path
 			folder_path="${folder_path//./}"
 
-#			folder_path=$(echo␣$folder_path␣|␣tr␣-d␣':;.,&<>?')
-
 			archive_path=$radio_archive
 			archive_path+=$folder_path
 			listen_path=$lms_radio_path
@@ -337,10 +327,9 @@ function process_radio_files {
 			local new_name="$path/$creation_date$file"
 			# Remove illegal characters from the full path, including the name
 			new_name=$(remove_illegal $new_name)
-
 			cp $eachfile $new_name
 			ssh $archive_server "mkdir -p $archive_path"
-			rsync -a -r -p "$new_name" "$archive_server:$archive_path"
+			rsync -r "$new_name" "$archive_server:$archive_path"
 			if [ "$?" -eq "0" ]
 			then
 				record="$archive_path$creation_date$file"
