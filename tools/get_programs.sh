@@ -35,6 +35,10 @@ radio_archive=$archive_root'Radio_Programes/'
 
 database='/get_iplayer/database/get-iplayer_log.db'
 
+obsidian_radio='/Obsidian_Share/Obsidian_notes/Mikes/Media-Lists/Radio-Programs.md'
+obsidian_tv='/Obsidian_Share/Obsidian_notes/Mikes/Media-Lists/TV-Programs.md'
+obsidian_cat='/Obsidian_Share/Obsidian_notes/Mikes/Media-Lists/TV-Uncategorised.md'
+
 completed=N
 
 declare -a TV_Programs=()
@@ -392,11 +396,13 @@ function add_2_lms {
 
 function notify_me {
 	download_date=printf date '%(%Y-%m-%d)T' -1
+	prefix="*   [ ] "
 	if (( ${#TV_Programs[@]} )); then
 		echo "Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
 		for var in "${TV_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"TV_progs.txt
+			echo "$prefix" + "${var//_/"\_"}" >> "$obsidian_tv"
 		done
 		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
@@ -407,6 +413,7 @@ function notify_me {
 		for var in "${Radio_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"Radio_progs.txt
+			echo "$prefix" + "${var//_/"\_"}" >> "$obsidian-radio"
 		done
 		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
@@ -417,6 +424,7 @@ function notify_me {
 		for var in "${categorise_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"Cat_progs.txt
+			echo "$prefix" + "${var//_/"\_"}" >> "$obsidian-cat"
 		done
 		cat "$app_root"Cat_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 
