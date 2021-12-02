@@ -402,7 +402,7 @@ function notify_me {
 		for var in "${TV_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"TV_progs.txt
-			echo "$prefix" + "${var//_/"\_"}" >> "$obsidian_tv"
+			echo "$prefix${var//_/"\_"}" >> "$obsidian_tv"
 		done
 		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
@@ -413,7 +413,7 @@ function notify_me {
 		for var in "${Radio_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"Radio_progs.txt
-			echo "$prefix" + "${var//_/"\_"}" >> "$obsidian-radio"
+			echo "$prefix${var//_/"\_"}" >> "$obsidian-radio"
 		done
 		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
@@ -424,7 +424,7 @@ function notify_me {
 		for var in "${categorise_Programs[@]}"
 		do
 			echo "${var}" >> "$app_root"Cat_progs.txt
-			echo "$prefix" + "${var//_/"\_"}" >> "$obsidian-cat"
+			echo "$prefix${var//_/"\_"}" >> "$obsidian-cat"
 		done
 		cat "$app_root"Cat_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 
