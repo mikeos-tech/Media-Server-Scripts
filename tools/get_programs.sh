@@ -427,9 +427,9 @@ function notify_me {
 			echo "$prefix${var//_/"\_"}" >> "$obsidian-cat"
 		done
 		cat "$app_root"Cat_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
-
 		completed=Y
 	fi
+	Download_sorter
 }
 
 # Set my default setting, they are remembered by programme, helps me remember them
