@@ -396,7 +396,7 @@ function add_2_lms {
 
 function notify_me {
 	download_date=printf date '%(%Y-%m-%d)T' -1
-	prefix="*   [ ] "
+	prefix="* [ ] "
 	if (( ${#TV_Programs[@]} )); then
 		echo "Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
 		for var in "${TV_Programs[@]}"
