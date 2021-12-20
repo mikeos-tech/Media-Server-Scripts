@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
  
 # Created by: Mike O’Shea
-# Created on: 23/11/2021
+# Created on: 19/12/2021
  
 # This script creates a Journal file for the current day
 # within the Obsidian Note Taking Applications folder structure.
@@ -12,11 +12,17 @@
 # of questions to provoke reflection/thought.
  
 # Create the target file path including the current date.
-filename="/Obsidian_Share/Obsidian_notes/Mikes/Journal/$(date +"%Y-%m-%d")-Journal.md"
+obsidian_path="Mikes/Journal/$(date + "%Y-%m-%d")-Journal.md"
+filename="/Obsidian_Share/Obsidian_notes/$obsidian_path"
 
 # Add the title to the file, which will be new.
 echo "# $(date +"%Y-%m-%d") - Journal" > $filename
 # Append the body to the file
+# Add the YAML Front Matter for the Meta-Data
+echo -e "---\n" >> $filename
+echo -e "\ntags: [Journal]\n" >> $filename
+echo -e "\nalias: []\n" >> $filename
+echo -e "\n---\n" >> $filename
 echo -e "\n" >> $filename
 echo "## What have I learned today?" >> $filename
 echo -e "\n\n\n" >> $filename
@@ -41,7 +47,9 @@ echo -e "\n" >> $filename
 echo "## Is there anything from today that I need to remember/record for future reference?" >> $filename
 echo -e "\n\n\n" >> $filename
 # Add the end line
-echo "---" >> $filename
-echo -e "\n" >> $filename
-# Add a tag to the end of the file
-echo "#Journal" >> $filename
+echo -e "---\n" >> $filename
+# Adding the file to the git repository
+cd /Obsidian_Share/Obsidian_notes/
+git add $obsidian_path
+git commit -m 'Adding Journal'
+git push -u origin main
