@@ -12,16 +12,20 @@
 # of questions to provoke reflection/thought.
  
 # Create the target file path including the current date.
-obsidian_path="Mikes/Journal/$(date + "%Y-%m-%d")-Journal.md"
+obsidian_path="Mikes/Journal/"$(date + "%Y-%m-%d")"-Journal.md"
 filename="/Obsidian_Share/Obsidian_notes/$obsidian_path"
 
-# Add the title to the file, which will be new.
-echo "# $(date +"%Y-%m-%d") - Journal" > $filename
-# Append the body to the file
 # Add the YAML Front Matter for the Meta-Data
-echo -e "---\n" >> $filename
+echo -e "---\n" > $filename
 echo -e "\ntags: [Journal]\n" >> $filename
 echo -e "\nalias: []\n" >> $filename
+echo -e "\n---\n" >> $filename
+echo -e "\n" >> $filename
+
+# Add the title to the file.
+echo -e "# $(date +"%Y-%m-%d") - Journal\n" >> $filename
+
+# Append the body to the file
 echo -e "\n---\n" >> $filename
 echo -e "\n" >> $filename
 echo "## What have I learned today?" >> $filename
