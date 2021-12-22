@@ -12,7 +12,7 @@
 # of questions to provoke reflection/thought.
  
 # Create the target file path including the current date.
-obsidian_path="Mikes/Journal/"$(date + "%Y-%m-%d")"-Journal.md"
+obsidian_path="Mikes/Journal/$(date + "%Y-%m-%d")-Journal.md"
 filename="/Obsidian_Share/Obsidian_notes/$obsidian_path"
 
 # Add the YAML Front Matter for the Meta-Data
