@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
  
 # Created by: Mike O’Shea
-# Created on: 22222222222222222222222222222222222222222222/12/2021
+# Created on: 02/01/2022
  
 # This script creates a Journal file for the current day
 # within the Obsidian Note Taking Applications folder structure.
@@ -17,16 +17,20 @@ filename="/Obsidian_Share/Obsidian_notes/$obsidian_path"
 
 # Add the YAML Front Matter for the Meta-Data
 echo -e "---\n" > $filename
-echo -e "\ntag: [Journal]\n" >> $filename
+echo -e "\ntag: [Thinking/Journal,Template/Journal]\n" >> $filename
 echo -e "\nalias: []\n" >> $filename
 echo -e "\n---\n" >> $filename
 echo -e "\n" >> $filename
 
 # Add the title to the file.
-echo -e "# $(date +"%Y-%m-%d") - Journal\n" >> $filename
+echo -e "# $(date +"%Y-%m-%d - %a") - Journal\n" >> $filename
 
 # Append the body to the file
 echo -e "\n---\n" >> $filename
+echo -e "\n" >> $filename
+echo -e "## General Thoughts and Reflections on the Day" >> $filename
+echo -e "\n\n\n" >> $filename
+echo -e "---" >> $filename
 echo -e "\n" >> $filename
 echo "## What have I learned today?" >> $filename
 echo -e "\n\n\n" >> $filename
