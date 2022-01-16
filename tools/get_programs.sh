@@ -24,7 +24,6 @@ tv_Program_list=$app_root"lists/tv_progs.txt"
 tv_search_criteria="$tv_downloads*.mp4"
 radio_search_criteria="$radio_downloads*.m4a"
 
-#lms_server='root@192.168.2.9'
 lms_radio_path='/storage/music/flac/radio/'
 
 archive_server='root@192.168.2.4'
@@ -355,8 +354,8 @@ function process_radio_files {
 				cat "$app_root"radio_error.txt | ssmtp michaeloshea@blueyonder.co.uk
 			fi
 		done
-		curl -s "http://192.168.2.9:9000/settings/index.html?p0=rescan" &>/dev/null
 	fi
+	curl -s "http://192.168.2.9:9000/settings/index.html?p0=rescan" &>/dev/null
 }
 
 function add_2_lms {
@@ -399,11 +398,13 @@ function notify_me {
 	prefix="* [ ] "
 	cd /Obsidian_Share/Obsidian_notes/
 	if (( ${#TV_Programs[@]} )); then
-		echo "Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
+#		echo "Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
 		for var in "${TV_Programs[@]}"
 		do
-#			echo "${var}" >> "$app_root"TV_progs.txt
+			echo "${var}" >> "$app_root"TV_progs.txt
 			echo "$prefix${var//_/"\_"}" >> "$obsidian_tv"
+			echo "$prefix${var//_/"\_"}" >> "$app_root"TV_progs.txt
+
 		done
 #		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
@@ -411,11 +412,12 @@ function notify_me {
 	fi
 
 	if (( ${#Radio_Programs[@]} )); then
-		echo "Subject: Radio Programs @GTD #radio #TV/Media +" > "$app_root"Radio_progs.txt
+#		echo "Subject: Radio Programs @GTD #radio #TV/Media +" > "$app_root"Radio_progs.txt
 		for var in "${Radio_Programs[@]}"
 		do
-#			echo "${var}" >> "$app_root"Radio_progs.txt
+			echo "${var}" >> "$app_root"Radio_progs.txt
 			echo "$prefix${var//_/"\_"}" >> "$obsidian_radio"
+			echo "$prefix${var//_/"\_"}" >> ""$app_root"Radio_progs.txt
 		done
 #		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
@@ -423,7 +425,7 @@ function notify_me {
 	fi
 
 	if (( ${#categorise_Programs[@]} )); then
-		echo "Subject: Categorise TV Programs !tomorrow @GTD #tv #TV/Media +" > "$app_root"Cat_progs.txt
+#		echo "Subject: Categorise TV Programs !tomorrow @GTD #tv #TV/Media +" > "$app_root"Cat_progs.txt
 		for var in "${categorise_Programs[@]}"
 		do
 #			echo "${var}" >> "$app_root"Cat_progs.txt
