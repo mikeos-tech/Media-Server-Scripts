@@ -394,7 +394,7 @@ function add_2_lms {
 }
 
 function notify_me {
-	download_date=printf date '%(%Y-%m-%d)T' -1
+# 	download_date=printf date '%(%Y-%m-%d)T' -1
 	prefix="* [ ] "
 	cd /Obsidian_Share/Obsidian_notes/
 	if (( ${#TV_Programs[@]} )); then
@@ -412,32 +412,29 @@ function notify_me {
 	fi
 
 	if (( ${#Radio_Programs[@]} )); then
-#		echo "Subject: Radio Programs @GTD #radio #TV/Media +" > "$app_root"Radio_progs.txt
 		for var in "${Radio_Programs[@]}"
 		do
-			echo "${var}" >> "$app_root"Radio_progs.txt
+#			echo "${var}" >> "$app_root"Radio_progs.txt
 			echo "$prefix${var//_/"\_"}" >> "$obsidian_radio"
-			echo "$prefix${var//_/"\_"}" >> ""$app_root"Radio_progs.txt
+#			echo "$prefix${var//_/"\_"}" >> "$app_root"Radio_progs.txt"
 		done
-#		cat "$app_root"Radio_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
 		git add $obsidian_radio
 	fi
 
 	if (( ${#categorise_Programs[@]} )); then
-#		echo "Subject: Categorise TV Programs !tomorrow @GTD #tv #TV/Media +" > "$app_root"Cat_progs.txt
 		for var in "${categorise_Programs[@]}"
 		do
-#			echo "${var}" >> "$app_root"Cat_progs.txt
+#			echo "${var}" >> "$app_root"Cat_progs.txt"
 			echo "$prefix${var//_/"\_"}" >> "$obsidian_cat"
 		done
 #		cat "$app_root"Cat_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
 		git add $obsidian_cat
 	fi
-	git commit -m 'Updated Media Lists'
-	git push -u origin main
 	Download_sorter
+	git commit -m 'Updated Media Lists'
+	git push # -u origin main
 }
 
 # Set my default setting, they are remembered by programme, helps me remember them
@@ -456,7 +453,11 @@ echo "Process Files"
 process_tv_files
 process_radio_files
 
+echo "Notify Me"
+
 notify_me
+
+echo "Update the Logs"
 
 now=$(date +%Y-%m-%d,%H:%M)
 log='/backups_local/script_log.csv'
