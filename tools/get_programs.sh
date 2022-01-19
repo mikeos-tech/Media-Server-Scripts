@@ -1,6 +1,6 @@
 # get_programs.sh 
 # creator: Mike O'Shea 
-# Updated: 22/06/2021 
+# Updated: 18/01/2022
 # This script downloads the programmes from the BBC site using get-iplayer. 
 # It downloads them, attempts to archive them and for radio programmes it
 # creates a flac copy and adds the file to LMS.
@@ -394,17 +394,13 @@ function add_2_lms {
 }
 
 function notify_me {
-# 	download_date=printf date '%(%Y-%m-%d)T' -1
 	prefix="* [ ] "
 	cd /Obsidian_Share/Obsidian_notes/
 	if (( ${#TV_Programs[@]} )); then
 #		echo "Subject: TV Programs @GTD #tv #TV/Media +" > "$app_root"TV_progs.txt
 		for var in "${TV_Programs[@]}"
 		do
-			echo "${var}" >> "$app_root"TV_progs.txt
 			echo "$prefix${var//_/"\_"}" >> "$obsidian_tv"
-			echo "$prefix${var//_/"\_"}" >> "$app_root"TV_progs.txt
-
 		done
 #		cat "$app_root"TV_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
@@ -414,9 +410,7 @@ function notify_me {
 	if (( ${#Radio_Programs[@]} )); then
 		for var in "${Radio_Programs[@]}"
 		do
-#			echo "${var}" >> "$app_root"Radio_progs.txt
 			echo "$prefix${var//_/"\_"}" >> "$obsidian_radio"
-#			echo "$prefix${var//_/"\_"}" >> "$app_root"Radio_progs.txt"
 		done
 		completed=Y
 		git add $obsidian_radio
@@ -425,10 +419,8 @@ function notify_me {
 	if (( ${#categorise_Programs[@]} )); then
 		for var in "${categorise_Programs[@]}"
 		do
-#			echo "${var}" >> "$app_root"Cat_progs.txt"
 			echo "$prefix${var//_/"\_"}" >> "$obsidian_cat"
 		done
-#		cat "$app_root"Cat_progs.txt | ssmtp michaeloshea0.e080170@m.evernote.com
 		completed=Y
 		git add $obsidian_cat
 	fi
